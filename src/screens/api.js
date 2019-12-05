@@ -7,7 +7,8 @@ import {
   StatusBar,
   ScrollView, 
   TextInput,
-  Alert
+  Alert,
+  ActivityIndicator
 } from 'react-native';
 import axios from 'axios'
 
@@ -19,7 +20,8 @@ class Api extends Component{
     url : 'https://jsonplaceholder.typicode.com/posts',
     title : '',
     body : '',
-    userId : 12
+    userId : 12,
+    isLoading : true
   }
 
   getPost = () => {
@@ -29,7 +31,8 @@ class Api extends Component{
     })
     .then(({data}) => {
       this.setState({
-        data
+        data,
+        isLoading : false
       })
     })
     .catch(error => {
@@ -40,27 +43,33 @@ class Api extends Component{
   submitPost = () => {
     const {title, body, userId} = this.state
     if(title && body){
-      axios({
-        method : "POST",
-        url : this.state.url,
-        body: JSON.stringify({
-          title,
-          body,
-          userId
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        }
-      })
-      .then(response => {
-        console.warn(response)
-        this.setState({
-          title : "",
-          body : ""
-        }, () => Alert.alert(`ID : ${JSON.stringify(response.data.id)}; Status : ${JSON.stringify(response.status)} `))
-      })
-      .catch(error => {
-        console.warn(error)
+      this.setState({
+        isLoading : true
+      },() => {
+        axios({
+          method : "POST",
+          url : this.state.url,
+          body: JSON.stringify({
+            title,
+            body,
+            userId
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+        })
+        .then(response => {
+          this.setState({
+            title : "",
+            body : "",
+            isLoading : false
+          }, () => Alert.alert(`ID : ${JSON.stringify(response.data.id)}; Status : ${JSON.stringify(response.status)} `))
+        })
+        .catch(error => {
+          this.setState({
+            isLoading : false
+          }, () => console.warn(error))
+        })
       })
     } else {
       Alert.alert('Isikan Semua Form')
@@ -73,9 +82,14 @@ class Api extends Component{
 
 
   render(){
-    const { data, title, body } = this.state
+    const { data, title, body, isLoading } = this.state
     return (
       <SafeAreaView>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.goBack()}
+        >
+          <Text style={{...customFont(60), color : '#0984e3'}}> back </Text>
+        </TouchableOpacity>
         <View
           style={{
             height : h/7,
@@ -124,7 +138,7 @@ class Api extends Component{
         </View>
         <View
           style={{
-            height : h/1.25,
+            height : h/1.3,
             padding : '2%'
           }}
         >
@@ -135,19 +149,23 @@ class Api extends Component{
             }}
           >
             {
-              data && data.map(({title, body}, index) => (
-                <View 
-                  key={index}
-                  style={{
-                    backgroundColor : '#55efc4',
-                    padding : 10,
-                    marginBottom : 10,
-                  }}
-                >
-                  <Text style={{textAlign : 'center', color : '#2d3436', ...customFont(60), marginBottom : 10}}>{title}</Text>
-                  <Text style={{textAlign : 'justify', color : '#2d3436', ...customFont(45)}}>{body}</Text>
-                </View>
-              ))
+              isLoading
+              ? <ActivityIndicator />
+              : (
+                data && data.map(({title, body}, index) => (
+                  <View 
+                    key={index}
+                    style={{
+                      backgroundColor : '#55efc4',
+                      padding : 10,
+                      marginBottom : 10,
+                    }}
+                  >
+                    <Text style={{textAlign : 'center', color : '#2d3436', ...customFont(60), marginBottom : 10}}>{title}</Text>
+                    <Text style={{textAlign : 'justify', color : '#2d3436', ...customFont(45)}}>{body}</Text>
+                  </View>
+                ))
+              )
             }
           </ScrollView>
         </View>

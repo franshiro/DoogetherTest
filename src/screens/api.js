@@ -85,6 +85,7 @@ class Api extends Component{
     const { data, title, body, isLoading } = this.state
     return (
       <SafeAreaView>
+        <StatusBar barStyle="dark-content" />
         <TouchableOpacity
           onPress={() => this.props.navigation.goBack()}
         >

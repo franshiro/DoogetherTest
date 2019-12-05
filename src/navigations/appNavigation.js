@@ -17,7 +17,7 @@ const AppNavigator = createStackNavigator(
     Location
   },
   {
-    initialRouteName: "Home",
+    initialRouteName: "Todo",
     headerMode: "none"
   }
 );

@@ -18,7 +18,6 @@ const Home = (props) => {
           style={{
             height : h, 
             width : w, 
-            backgroundColor : 'yellow',
             padding : '2%',
           }}
         >
@@ -27,7 +26,7 @@ const Home = (props) => {
               top : '5%'
             }}
           >
-            <Text style={{ textAlign : 'center', ...customFont(150)}}>Doogather Test</Text>
+            <Text style={{ textAlign : 'center', ...customFont(150), color : '#00b894'}}>Doogather Test</Text>
           </View>
           <View
             style={{

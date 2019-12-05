@@ -14,7 +14,7 @@ const MenuButton = ({name, route, navigation}, ...props) => {
       <TouchableOpacity
         style={{
           height : h/10,
-          backgroundColor : 'red',
+          backgroundColor : '#74b9ff',
           justifyContent : 'center',
           alignItems : 'center',
           borderRadius : 12,
@@ -22,7 +22,7 @@ const MenuButton = ({name, route, navigation}, ...props) => {
         onPress={() => route ? navigation.navigate(route) : null}
       >
         <View>
-          <Text style={{...customFont(75)}}>{name}</Text>
+          <Text style={{...customFont(75), color : '#fff'}}>{name}</Text>
         </View>
       </TouchableOpacity>
     </Fragment>

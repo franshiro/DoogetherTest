@@ -17,7 +17,7 @@ const AppNavigator = createStackNavigator(
     Location
   },
   {
-    initialRouteName: "Home",
+    initialRouteName: "Api",
     headerMode: "none"
   }
 );

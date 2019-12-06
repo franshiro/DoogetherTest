@@ -9,7 +9,6 @@ import {
   TextInput,
   Alert,
   ActivityIndicator,
-  Platform
 } from 'react-native';
 import axios from 'axios'
 
@@ -86,7 +85,7 @@ class Api extends Component{
     const { data, title, body, isLoading } = this.state
     return (
       <SafeAreaView>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar barStyle="dark-content" backgroundColor="transparent"/>
         <TouchableOpacity
           onPress={() => this.props.navigation.goBack()}
         >

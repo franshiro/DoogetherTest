@@ -70,7 +70,7 @@ class Location extends Component{
     const {mapLoading, latlong} = this.state
     return (
       <SafeAreaView>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar barStyle="dark-content" backgroundColor="transparent" />
         <TouchableOpacity
           onPress={() => this.props.navigation.goBack()}
         >

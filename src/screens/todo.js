@@ -104,7 +104,7 @@ class Todo extends Component{
     const {todo, todos} = this.state
     return (
       <SafeAreaView>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar barStyle="dark-content" backgroundColor="transparent"/>
         <TouchableOpacity
           onPress={() => this.props.navigation.goBack()}
         >

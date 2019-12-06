@@ -12,7 +12,7 @@ import MenuButton from '../components/menuButton'
 const Home = (props) => {
   return (
     <Fragment>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="dark-content" backgroundColor="transparent"/>
       <SafeAreaView>
         <View 
           style={{

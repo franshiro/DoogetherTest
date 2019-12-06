@@ -8,7 +8,8 @@ import {
   TextInput,
   Alert
 } from 'react-native';
-import {h, w, customFont} from '../components/variable/dimension'
+import Icon from 'react-native-vector-icons/FontAwesome5'
+import {h, customFont} from '../components/variable/dimension'
 import { ScrollView } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -31,8 +32,6 @@ class Todo extends Component{
       await this.setState({
         todos : newTodos
       })
-
-      console.warn(newTodos)
     }
     catch(error){
       console.warn(error)
@@ -97,37 +96,29 @@ class Todo extends Component{
     }
   }
 
-  clearStorage = async () => {
-    await AsyncStorage.clear()
-    await this.getTodo()
-
-    // await this.deleteTodo()
-  }
-
   componentDidMount(){
     this.getTodo()
   }
+
   render(){
     const {todo, todos} = this.state
     return (
       <SafeAreaView>
         <StatusBar barStyle="dark-content" />
         <TouchableOpacity
-          // onPress={() => this.props.navigation.goBack()}
-          onPress={() => this.clearStorage()}
+          onPress={() => this.props.navigation.goBack()}
         >
           <Text style={{...customFont(60), color : '#0984e3'}}> back </Text>
         </TouchableOpacity>
         <View
           style={{
             height : h/1.12,
-            backgroundColor : 'yellow'
           }}
         >
           <View
             style={{
               height : '15%',
-              backgroundColor : 'green',
+              backgroundColor : '#dfe6e9',
               paddingHorizontal : '2%'
             }}
           >
@@ -140,18 +131,20 @@ class Todo extends Component{
               <TextInput 
                 style={{
                   height : '40%',
-                  backgroundColor : '#ffeaa7',
+                  backgroundColor : '#b2bec3',
                   paddingHorizontal : 20,
-                  borderRadius : 12
+                  borderRadius : 12,
+                  color : '#fff'
                 }}
                 placeholder="Todo..."
+                placeholderTextColor = "#dfe6e9"
                 value={todo}
                 onChangeText={value => this.setState({todo : value})}
               />
               <TouchableOpacity
                 style={{
                   height : '40%',
-                  backgroundColor : '#0984e3',
+                  backgroundColor : '#2980b9',
                   borderRadius : 12,
                   justifyContent : 'center',
                   alignItems : 'center'
@@ -164,7 +157,6 @@ class Todo extends Component{
           </View>
           <ScrollView
             style={{
-              backgroundColor : 'skyblue',
               padding : '2%'
             }}
           >
@@ -173,41 +165,40 @@ class Todo extends Component{
                 <View
                   key={index}
                   style={{
-                    backgroundColor : 'grey',
+                    backgroundColor : isDone ? '#576574' : '#dfe6e9',
                     marginBottom : 10,
                     flexDirection : 'row',
-                    justifyContent : 'space-between'
+                    justifyContent : 'space-between',
+                    borderRadius : 12,
+                    overflow : 'hidden'
                   }}
                 >
                   <View style={{ width : '79%', padding : 10}}>
-                    <Text>{id}</Text>
-                    <Text>{todo}</Text>
-                    <Text>{isDone ? 'selesai' : 'pending'}</Text>
-                    <Text></Text>
+                    <Text style={{ color : isDone ? '#ecf0f1' : '#2d3436', textAlign : 'justify'}}>{todo}</Text>
                   </View>
 
                   <TouchableOpacity
                     style={{
                       width : '10%',
-                      backgroundColor : 'pink',
+                      backgroundColor : '#2980b9',
                       justifyContent : 'center',
                       alignItems : 'center'
                     }}
                     onPress={() => this.updateTodo(id)}
                   >
-                    <Text>Edit</Text>
+                    <Icon name={isDone ? 'check-square' : 'square'} style={{color : '#fff', ...customFont(50)}} />
                   </TouchableOpacity>
                   
                   <TouchableOpacity
                     style={{
                       width : '10%',
-                      backgroundColor : 'pink',
+                      backgroundColor : '#d63031',
                       justifyContent : 'center',
                       alignItems : 'center'
                     }}
                     onPress={() => this.deleteTodo(id)}
                   >
-                    <Text>Del</Text>
+                    <Icon name="trash-alt" style={{color : '#fff', ...customFont(50)}}/>
                   </TouchableOpacity>
                 </View>
               ))

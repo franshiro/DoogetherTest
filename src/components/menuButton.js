@@ -1,12 +1,10 @@
 import React, {Fragment} from 'react';
 import {
-  SafeAreaView,
   View,
   Text,
   TouchableOpacity,
-  StatusBar,
 } from 'react-native';
-import {h, w, customFont} from './variable/dimension'
+import {h, customFont} from './variable/dimension'
 
 const MenuButton = ({name, route, navigation}, ...props) => {
   return (

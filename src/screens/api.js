@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import axios from 'axios'
 
-import {h, w, customFont} from '../components/variable/dimension'
+import {h, customFont} from '../components/variable/dimension'
 
 class Api extends Component{
   state={
@@ -108,7 +108,8 @@ class Api extends Component{
             <TextInput 
               style={{
                 height : '30%',
-                backgroundColor : '#ffeaa7'
+                backgroundColor : '#fff',
+                paddingHorizontal : 10
               }}
               placeholder="Title"
               value={title}
@@ -117,7 +118,8 @@ class Api extends Component{
             <TextInput 
               style={{
                 height : '30%',
-                backgroundColor : '#ffeaa7'
+                backgroundColor : '#fff',
+                paddingHorizontal : 10
               }}
               placeholder="Content"
               value={body}

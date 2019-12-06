@@ -4,7 +4,7 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StatusBar,
+  StatusBar, 
   TextInput,
   Alert
 } from 'react-native';
@@ -16,6 +16,27 @@ class Todo extends Component{
   state = {
     todo : '',
     todos : null
+  }
+
+  updateTodo = async (id) => {
+    try{
+      const { todos } = this.state
+      let newTodos = todos
+      const filterUpdate = await todos.filter(i => i.id == id)
+
+      filterUpdate[0].isDone = !filterUpdate[0].isDone
+
+      await AsyncStorage.setItem('Todo', JSON.stringify(newTodos))
+
+      await this.setState({
+        todos : newTodos
+      })
+
+      console.warn(newTodos)
+    }
+    catch(error){
+      console.warn(error)
+    }
   }
 
   deleteTodo = async (idDel) => {
@@ -77,10 +98,10 @@ class Todo extends Component{
   }
 
   clearStorage = async () => {
-    // await AsyncStorage.clear()
-    // await this.getTodo()
+    await AsyncStorage.clear()
+    await this.getTodo()
 
-    await this.deleteTodo()
+    // await this.deleteTodo()
   }
 
   componentDidMount(){
@@ -155,18 +176,31 @@ class Todo extends Component{
                     backgroundColor : 'grey',
                     marginBottom : 10,
                     flexDirection : 'row',
-
+                    justifyContent : 'space-between'
                   }}
                 >
-                  <View style={{ width : '80%', padding : 10}}>
+                  <View style={{ width : '79%', padding : 10}}>
                     <Text>{id}</Text>
                     <Text>{todo}</Text>
                     <Text>{isDone ? 'selesai' : 'pending'}</Text>
                     <Text></Text>
                   </View>
+
                   <TouchableOpacity
                     style={{
-                      width : '20%',
+                      width : '10%',
+                      backgroundColor : 'pink',
+                      justifyContent : 'center',
+                      alignItems : 'center'
+                    }}
+                    onPress={() => this.updateTodo(id)}
+                  >
+                    <Text>Edit</Text>
+                  </TouchableOpacity>
+                  
+                  <TouchableOpacity
+                    style={{
+                      width : '10%',
                       backgroundColor : 'pink',
                       justifyContent : 'center',
                       alignItems : 'center'

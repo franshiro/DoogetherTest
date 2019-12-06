@@ -109,7 +109,8 @@ class Api extends Component{
               style={{
                 height : '30%',
                 backgroundColor : '#fff',
-                paddingHorizontal : 10
+                paddingHorizontal : 10,
+                color : '#636e72'
               }}
               placeholder="Title"
               value={title}
@@ -119,7 +120,8 @@ class Api extends Component{
               style={{
                 height : '30%',
                 backgroundColor : '#fff',
-                paddingHorizontal : 10
+                paddingHorizontal : 10,
+                color : '#636e72'
               }}
               placeholder="Content"
               value={body}
@@ -162,6 +164,7 @@ class Api extends Component{
                       backgroundColor : '#55efc4',
                       padding : 10,
                       marginBottom : 10,
+                      borderRadius : 5
                     }}
                   >
                     <Text style={{textAlign : 'center', color : '#2d3436', ...customFont(60), marginBottom : 10}}>{title}</Text>

@@ -8,7 +8,8 @@ import {
   ScrollView, 
   TextInput,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
+  Platform
 } from 'react-native';
 import axios from 'axios'
 
@@ -110,6 +111,7 @@ class Api extends Component{
                 height : '30%',
                 backgroundColor : '#fff',
                 paddingHorizontal : 10,
+                paddingVertical : 0,
                 color : '#636e72'
               }}
               placeholder="Title"
@@ -121,6 +123,7 @@ class Api extends Component{
                 height : '30%',
                 backgroundColor : '#fff',
                 paddingHorizontal : 10,
+                paddingVertical : 0,
                 color : '#636e72'
               }}
               placeholder="Content"

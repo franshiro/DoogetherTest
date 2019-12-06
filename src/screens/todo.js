@@ -88,7 +88,7 @@ class Todo extends Component{
           todos : JSON.parse(value)
         })
       } else {
-        console.warn('tidak ada data')
+        Alert.alert('Belum ada data')
       }
     }
     catch(error){

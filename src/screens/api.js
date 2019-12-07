@@ -9,6 +9,7 @@ import {
   TextInput,
   Alert,
   ActivityIndicator,
+  StyleSheet
 } from 'react-native';
 import axios from 'axios'
 
@@ -106,37 +107,19 @@ class Api extends Component{
             }}
           >
             <TextInput 
-              style={{
-                height : '30%',
-                backgroundColor : '#fff',
-                paddingHorizontal : 10,
-                paddingVertical : 0,
-                color : '#636e72'
-              }}
+              style={styles.inputTodo}
               placeholder="Title"
               value={title}
               onChangeText={value => this.setState({title : value})}
             />
             <TextInput 
-              style={{
-                height : '30%',
-                backgroundColor : '#fff',
-                paddingHorizontal : 10,
-                paddingVertical : 0,
-                color : '#636e72'
-              }}
+              style={styles.inputTodo}
               placeholder="Content"
               value={body}
               onChangeText={value => this.setState({body : value})}
             />
             <TouchableOpacity
-              style={{
-                height : '30%',
-                backgroundColor : '#0984e3',
-                borderRadius : 12,
-                justifyContent : 'center',
-                alignItems : 'center'
-              }}
+              style={styles.buttonSubmit}
               onPress={this.submitPost}
             >
               <Text style={{color : '#fff'}}>Submit</Text>
@@ -181,5 +164,22 @@ class Api extends Component{
     )
   }
 }
+
+const styles = StyleSheet.create({
+  buttonSubmit : {
+    height : '30%',
+    backgroundColor : '#0984e3',
+    borderRadius : 12,
+    justifyContent : 'center',
+    alignItems : 'center'
+  },
+  inputTodo : {
+    height : '30%',
+    backgroundColor : '#fff',
+    paddingHorizontal : 10,
+    paddingVertical : 0,
+    color : '#636e72'
+  }
+})
 
 export default Api
